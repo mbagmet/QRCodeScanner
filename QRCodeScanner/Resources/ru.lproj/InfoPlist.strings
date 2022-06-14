@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  QRCodeScanner
+
+  Created by Михаил Багмет on 14.06.2022.
+  
+*/
+NSCameraUsageDescription = "Приложение запрашивает доступ к камере для сканирования QR-кодов";
