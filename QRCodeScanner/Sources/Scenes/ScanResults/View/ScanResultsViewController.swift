@@ -9,21 +9,25 @@ import UIKit
 
 class ScanResultsViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    var presenter = ScanResultsPresenter()
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // MARK: Presenter setup
+        presenter.setViewDelegate(delegate: self)
+        
+        // MARK: View Setup
+        view.backgroundColor = .systemPink
     }
+}
+
+// MARK: - Presenter Delegate
+
+extension ScanResultsViewController: ScanResultsPresenterDelegate {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

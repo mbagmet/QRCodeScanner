@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol ScanResults {
+    var delegate: ScanResultsPresenterDelegate? { get set }
+    
+    func setViewDelegate(delegate: ScanResultsPresenterDelegate)
+}

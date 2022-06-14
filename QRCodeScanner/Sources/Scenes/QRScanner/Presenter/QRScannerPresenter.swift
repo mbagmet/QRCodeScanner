@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+class QRScannerPresenter: QRScanner {
+    
+    // MARK: - Properties
+    
+    weak var delegate: QRScannerPresenterDelegate?
+    
+    // MARK: - Configuration
+    
+    func setViewDelegate(delegate: QRScannerPresenterDelegate) {
+        self.delegate = delegate
+    }
+}

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol QRScanner {
+    var delegate: QRScannerPresenterDelegate? { get set }
+    
+    func setViewDelegate(delegate: QRScannerPresenterDelegate)
+}
