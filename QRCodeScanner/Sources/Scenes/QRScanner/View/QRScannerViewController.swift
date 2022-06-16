@@ -6,12 +6,25 @@
 //
 
 import UIKit
+import SnapKit
 
 class QRScannerViewController: UIViewController {
 
     // MARK: - Properties
     
     var presenter = QRScannerPresenter()
+    
+    // MARK: - Views
+    
+    private lazy var cameraPreviewView = CameraPreviewView()
+    
+    private lazy var qrLabel: UILabel = {
+        let label = UILabel()
+        label.text = "test"
+        label.textColor = .white
+        
+        return label
+    }()
     
     // MARK: - Lifecycle
     
@@ -20,9 +33,52 @@ class QRScannerViewController: UIViewController {
         
         // MARK: Presenter setup
         presenter.setViewDelegate(delegate: self)
+        presenter.configureCaptureService()
         
         // MARK: View Setup
-        view.backgroundColor = .systemTeal
+        setupHierarchy()
+        setupLayout()
+        setupView()
+        
+        // MARK: Camera Preview Setup
+        setupCameraPreviewView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presenter.startCaptureService()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopCaptureService()
+        
+        super.viewWillDisappear(animated)
+    }
+    
+    // MARK: - Settings
+    
+    private func setupHierarchy() {
+        view.addSubview(cameraPreviewView)
+        view.addSubview(qrLabel)
+    }
+    
+    private func setupLayout() {
+        cameraPreviewView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        qrLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .black
+    }
+    
+    private func setupCameraPreviewView() {
+        cameraPreviewView.captureSession = presenter.captureSession
     }
 }
 

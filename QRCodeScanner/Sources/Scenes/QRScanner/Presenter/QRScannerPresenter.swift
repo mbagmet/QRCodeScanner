@@ -5,17 +5,36 @@
 //  Created by Михаил Багмет on 14.06.2022.
 //
 
-import Foundation
+import AVFoundation
 
 class QRScannerPresenter: QRScanner {
     
     // MARK: - Properties
     
-    weak var delegate: QRScannerPresenterDelegate?
+    weak var view: QRScannerPresenterDelegate?
+    
+    private var captureProvider = CaptureProvider()
+    var captureSession: AVCaptureSession?
     
     // MARK: - Configuration
     
     func setViewDelegate(delegate: QRScannerPresenterDelegate) {
-        self.delegate = delegate
+        self.view = delegate
     }
+    
+    func configureCaptureService() {
+        captureProvider.configure()
+        captureSession = captureProvider.captureSession
+    }
+    
+    // MARK: - Methods
+    
+    func startCaptureService() {
+        captureProvider.startCaption()
+    }
+    
+    func stopCaptureService() {
+        captureProvider.stopCaption()
+    }
+    
 }
