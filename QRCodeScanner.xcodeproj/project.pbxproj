@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D92C3D04285BB41E008EA36C /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D03285BB41E008EA36C /* CameraPreviewView.swift */; };
+		D92C3D07285BB5EC008EA36C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D92C3D06285BB5EC008EA36C /* SnapKit */; };
+		D92C3D0B285BCB90008EA36C /* QRScannerCaptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */; };
+		D92C3D0D285BE512008EA36C /* CaptureProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */; };
+		D92C3D10285BEA3A008EA36C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0F285BEA3A008EA36C /* String+Ext.swift */; };
 		D972ADCA2858D40D00080DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADC92858D40D00080DC8 /* AppDelegate.swift */; };
 		D972ADCC2858D40D00080DC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADCB2858D40D00080DC8 /* SceneDelegate.swift */; };
 		D972ADCE2858D40D00080DC8 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADCD2858D40D00080DC8 /* QRScannerViewController.swift */; };
@@ -20,9 +25,15 @@
 		D972ADF42859014300080DC8 /* ScanResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADF32859014300080DC8 /* ScanResults.swift */; };
 		D972ADF62859017000080DC8 /* ScanResultsPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADF52859017000080DC8 /* ScanResultsPresenterDelegate.swift */; };
 		D972ADF82859018900080DC8 /* ScanResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADF72859018900080DC8 /* ScanResultsViewController.swift */; };
+		D9A33340285A6D120037A3D5 /* CaptureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A3333F285A6D120037A3D5 /* CaptureProvider.swift */; };
+		D9F544EE28591B2A00A6E51B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9F544F028591B2A00A6E51B /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D92C3D03285BB41E008EA36C /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerCaptionProvider.swift; sourceTree = "<group>"; };
+		D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureProviderDelegate.swift; sourceTree = "<group>"; };
+		D92C3D0F285BEA3A008EA36C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		D972ADC62858D40D00080DC8 /* QRCodeScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D972ADC92858D40D00080DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D972ADCB2858D40D00080DC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +49,8 @@
 		D972ADF32859014300080DC8 /* ScanResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResults.swift; sourceTree = "<group>"; };
 		D972ADF52859017000080DC8 /* ScanResultsPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResultsPresenterDelegate.swift; sourceTree = "<group>"; };
 		D972ADF72859018900080DC8 /* ScanResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResultsViewController.swift; sourceTree = "<group>"; };
+		D9A3333F285A6D120037A3D5 /* CaptureProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureProvider.swift; sourceTree = "<group>"; };
+		D9F544EF28591B2A00A6E51B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +58,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92C3D07285BB5EC008EA36C /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D92C3D09285BCB36008EA36C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D92C3D0E285BEA1F008EA36C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D92C3D0F285BEA3A008EA36C /* String+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D972ADBD2858D40D00080DC8 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +113,7 @@
 				D972ADD22858D40F00080DC8 /* Assets.xcassets */,
 				D972ADD42858D40F00080DC8 /* LaunchScreen.storyboard */,
 				D972ADD72858D40F00080DC8 /* Info.plist */,
+				D9F544F028591B2A00A6E51B /* InfoPlist.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -92,6 +123,8 @@
 			children = (
 				D972ADDF2858F86700080DC8 /* App */,
 				D972ADE02858F8A300080DC8 /* Scenes */,
+				D9A3333E285A6C870037A3D5 /* CaptureProvider */,
+				D92C3D0E285BEA1F008EA36C /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -137,6 +170,7 @@
 			children = (
 				D972ADEA2858FDD600080DC8 /* Protocols */,
 				D972ADCD2858D40D00080DC8 /* QRScannerViewController.swift */,
+				D92C3D03285BB41E008EA36C /* CameraPreviewView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				D972ADEB2858FEAC00080DC8 /* QRScanner.swift */,
+				D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -200,6 +235,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		D9A3333E285A6C870037A3D5 /* CaptureProvider */ = {
+			isa = PBXGroup;
+			children = (
+				D92C3D09285BCB36008EA36C /* Protocols */,
+				D9A3333F285A6D120037A3D5 /* CaptureProvider.swift */,
+			);
+			path = CaptureProvider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -216,6 +260,9 @@
 			dependencies = (
 			);
 			name = QRCodeScanner;
+			packageProductDependencies = (
+				D92C3D06285BB5EC008EA36C /* SnapKit */,
+			);
 			productName = QRCodeScanner;
 			productReference = D972ADC62858D40D00080DC8 /* QRCodeScanner.app */;
 			productType = "com.apple.product-type.application";
@@ -242,8 +289,12 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = D972ADBD2858D40D00080DC8;
+			packageReferences = (
+				D92C3D05285BB5EC008EA36C /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = D972ADC72858D40D00080DC8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D972ADD62858D40F00080DC8 /* LaunchScreen.storyboard in Resources */,
+				D9F544EE28591B2A00A6E51B /* InfoPlist.strings in Resources */,
 				D972ADD32858D40F00080DC8 /* Assets.xcassets in Resources */,
 				D972ADD12858D40D00080DC8 /* Main.storyboard in Resources */,
 			);
@@ -273,13 +325,18 @@
 			files = (
 				D972ADEE2858FF2800080DC8 /* QRScannerPresenterDelegate.swift in Sources */,
 				D972ADE82858FD8600080DC8 /* QRScannerPresenter.swift in Sources */,
+				D92C3D0D285BE512008EA36C /* CaptureProviderDelegate.swift in Sources */,
+				D92C3D10285BEA3A008EA36C /* String+Ext.swift in Sources */,
 				D972ADF22859013100080DC8 /* ScanResultsPresenter.swift in Sources */,
 				D972ADF42859014300080DC8 /* ScanResults.swift in Sources */,
 				D972ADCE2858D40D00080DC8 /* QRScannerViewController.swift in Sources */,
 				D972ADCA2858D40D00080DC8 /* AppDelegate.swift in Sources */,
 				D972ADCC2858D40D00080DC8 /* SceneDelegate.swift in Sources */,
 				D972ADEC2858FEAC00080DC8 /* QRScanner.swift in Sources */,
+				D92C3D0B285BCB90008EA36C /* QRScannerCaptionProvider.swift in Sources */,
+				D92C3D04285BB41E008EA36C /* CameraPreviewView.swift in Sources */,
 				D972ADF82859018900080DC8 /* ScanResultsViewController.swift in Sources */,
+				D9A33340285A6D120037A3D5 /* CaptureProvider.swift in Sources */,
 				D972ADF62859017000080DC8 /* ScanResultsPresenterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +360,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		D9F544F028591B2A00A6E51B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9F544EF28591B2A00A6E51B /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -310,6 +375,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -370,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -498,6 +565,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D92C3D05285BB5EC008EA36C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D92C3D06285BB5EC008EA36C /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D92C3D05285BB5EC008EA36C /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D972ADBE2858D40D00080DC8 /* Project object */;
 }
