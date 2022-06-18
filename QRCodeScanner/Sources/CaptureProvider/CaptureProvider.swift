@@ -7,9 +7,11 @@
 
 import AVFoundation
 
-class CaptureProvider: NSObject, QRScannerCaptionProvider, AVCaptureMetadataOutputObjectsDelegate {
+class CaptureProvider: NSObject, QRScannerCaptionProvider {
     
     // MARK: - Properties
+    
+    weak var delegate: CaptureProviderDelegate?
     
     // Session
     let captureSession = AVCaptureSession()
@@ -27,6 +29,7 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider, AVCaptureMetadataOutp
     private var videoDeviceInput: AVCaptureDeviceInput!
     private let metadataOutput = AVCaptureMetadataOutput()
     private let metadataObjectsQueue = DispatchQueue(label: "Metadata Objects Queue")
+    private let metadataObjectsSemaphore = DispatchSemaphore(value: 1)
     
     // MARK: - Configuration
     
@@ -154,6 +157,37 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider, AVCaptureMetadataOutp
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: metadataObjectsQueue)
             metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        }
+    }
+}
+
+// MARK: - AVCaptureMetadataOutputObjectsDelegate
+
+extension CaptureProvider: AVCaptureMetadataOutputObjectsDelegate {
+    
+    /// При нахождении мета-данных проверяем, что это QR-код и в нем закодирована ссылка. Если да, то запускаем openWebView(with: qrCodeText)
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        
+        if metadataObjects.count == 0 {
+            return
+        }
+        
+        guard let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject else { return }
+        
+        if metadataObject.type == AVMetadataObject.ObjectType.qr {
+            guard let qrCodeText = metadataObject.stringValue else { return }
+
+            if !qrCodeText.isValidURL{
+                return
+            }
+
+            if metadataObjectsSemaphore.wait(timeout: .now()) == .success {
+                DispatchQueue.main.async {
+                    self.delegate?.openWebView(with: qrCodeText)
+
+                    self.metadataObjectsSemaphore.signal()
+                }
+            }
         }
     }
 }

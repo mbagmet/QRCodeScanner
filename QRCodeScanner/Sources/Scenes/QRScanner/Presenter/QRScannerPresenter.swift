@@ -16,6 +16,12 @@ class QRScannerPresenter: QRScanner {
     private var captureProvider = CaptureProvider()
     var captureSession: AVCaptureSession?
     
+    // MARK: - Initializers
+    
+    init() {
+        captureProvider.delegate = self
+    }
+    
     // MARK: - Configuration
     
     func setViewDelegate(delegate: QRScannerPresenterDelegate) {
@@ -35,6 +41,13 @@ class QRScannerPresenter: QRScanner {
     
     func stopCaptureService() {
         captureProvider.stopCaption()
+    }    
+}
+
+// MARK: - CaptureProviderDelegate
+
+extension QRScannerPresenter: CaptureProviderDelegate {
+    func openWebView(with url: String) {
+        print(url)
     }
-    
 }

@@ -8,8 +8,8 @@
 import AVFoundation
 
 protocol QRScannerCaptionProvider {
+    var delegate: CaptureProviderDelegate? { get set }
     var captureSession: AVCaptureSession { get }
     
     func configure()
-    
 }
