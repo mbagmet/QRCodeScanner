@@ -12,4 +12,6 @@ protocol QRScannerCaptionProvider {
     var captureSession: AVCaptureSession { get }
     
     func configure()
+    func startCaption()
+    func stopCaption()
 }
