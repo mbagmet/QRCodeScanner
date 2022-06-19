@@ -47,7 +47,8 @@ class QRScannerPresenter: QRScanner {
 // MARK: - CaptureProviderDelegate
 
 extension QRScannerPresenter: CaptureProviderDelegate {
-    func openWebView(with url: String) {
+    func openWebView(with url: URL) {
         print(url)
+        view?.showWebView(with: url)
     }
 }

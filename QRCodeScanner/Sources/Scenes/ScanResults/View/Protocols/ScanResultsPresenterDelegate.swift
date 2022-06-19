@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ScanResultsPresenterDelegate: AnyObject {
-    
+    func showWebPage(url: URL)
 }

@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ScanResults {
-    var delegate: ScanResultsPresenterDelegate? { get set }
+    var view: ScanResultsPresenterDelegate? { get set }
     
     func setViewDelegate(delegate: ScanResultsPresenterDelegate)
+    func getUrl()
 }

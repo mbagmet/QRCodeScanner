@@ -85,5 +85,9 @@ class QRScannerViewController: UIViewController {
 // MARK: - Presenter Delegate
 
 extension QRScannerViewController: QRScannerPresenterDelegate {
-
+    func showWebView(with url: URL) {
+        let scanResultsViewController = ScanResultsViewController()
+        scanResultsViewController.presenter.url = url
+        navigationController?.pushViewController(scanResultsViewController, animated: true)
+    }
 }
