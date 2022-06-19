@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CaptureProviderDelegate: AnyObject {
-    func openWebView(with url: String)
+    func openWebView(with url: URL)
 }

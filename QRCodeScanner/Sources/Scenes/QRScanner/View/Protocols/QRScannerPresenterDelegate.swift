@@ -8,5 +8,5 @@
 import Foundation
 
 protocol QRScannerPresenterDelegate: AnyObject {
-    
+    func showWebView(with url: URL)
 }

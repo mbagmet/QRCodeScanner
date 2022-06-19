@@ -11,11 +11,17 @@ class ScanResultsPresenter: ScanResults {
     
     // MARK: - Properties
     
-    weak var delegate: ScanResultsPresenterDelegate?
+    weak var view: ScanResultsPresenterDelegate?
+    var url: URL?
     
     // MARK: - Configuration
     
     func setViewDelegate(delegate: ScanResultsPresenterDelegate) {
-        self.delegate = delegate
+        self.view = delegate
+    }
+    
+    func getUrl() {
+        guard let url = url else { return }
+        view?.showWebPage(url: url)
     }
 }

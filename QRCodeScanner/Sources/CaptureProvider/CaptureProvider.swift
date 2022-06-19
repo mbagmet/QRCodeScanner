@@ -180,12 +180,14 @@ extension CaptureProvider: AVCaptureMetadataOutputObjectsDelegate {
             if !qrCodeText.isValidURL{
                 return
             }
-
-            if metadataObjectsSemaphore.wait(timeout: .now()) == .success {
-                DispatchQueue.main.async {
-                    self.delegate?.openWebView(with: qrCodeText)
-
-                    self.metadataObjectsSemaphore.signal()
+            
+            if let url = URL(string: qrCodeText) {
+                if metadataObjectsSemaphore.wait(timeout: .now()) == .success {
+                    DispatchQueue.main.async {
+                        self.delegate?.openWebView(with: url)
+                        self.stopCaption()
+                        self.metadataObjectsSemaphore.signal()
+                    }          
                 }
             }
         }
