@@ -50,10 +50,14 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
                 
             case .success:
                 self.captureSession.startRunning()
-            case .denied: break
-                // TODO
-            case .failed: break
-                // TODO
+            case .denied:
+                DispatchQueue.main.async {
+                    self.delegate?.openAlert(openSettings: true, message: NSLocalizedString("NOT_AUTHORIZED_MESSAGE", comment: ""))
+                }
+            case .failed:
+                DispatchQueue.main.async {
+                    self.delegate?.openAlert(openSettings: false, message: NSLocalizedString("CONFIGURATION_FAILURE_MESSAGE", comment: ""))
+                }
             }
         }
     }

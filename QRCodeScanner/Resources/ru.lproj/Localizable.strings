@@ -10,3 +10,7 @@
 "SUCCESS_MESSAGE_TITLE" = "Успех";
 "SUCCESS_MESSAGE" = "Операция завершена успешно.";
 "DISMISS_BUTTON_TITLE" = "Ок";
+
+"SETTINGS" = "Настройки";
+"NOT_AUTHORIZED_MESSAGE" = "У QRCodeScanner отсутсвуют права на использование камеры, пожалуйста измените настройки приватности.";
+"CONFIGURATION_FAILURE_MESSAGE" = "Невозможно сканировать QR-коды";
