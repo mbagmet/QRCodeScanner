@@ -26,6 +26,24 @@ class QRScannerViewController: UIViewController {
         return label
     }()
     
+    lazy var regionOfInterestImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+//        imageView.tintColor = .secondarySystemBackground
+        imageView.image = UIImage(named: "caption")
+        
+//        imageView.clipsToBounds = true
+//        imageView.layer.masksToBounds = true
+//        imageView.layer.cornerRadius = Metric.imageSize / 2
+//        imageView.layer.borderWidth = Metric.imageBorderWidth
+//        imageView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+//
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
+//        imageView.addGestureRecognizer(tapGestureRecognizer)
+
+        return imageView
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -60,7 +78,7 @@ class QRScannerViewController: UIViewController {
     
     private func setupHierarchy() {
         view.addSubview(cameraPreviewView)
-        view.addSubview(qrLabel)
+        view.addSubview(regionOfInterestImageView)
     }
     
     private func setupLayout() {
@@ -68,8 +86,11 @@ class QRScannerViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        qrLabel.snp.makeConstraints { make in
+        regionOfInterestImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            
+            make.height.equalTo(Metrics.imageSize)
+            make.width.equalTo(regionOfInterestImageView.snp.height)
         }
     }
     
@@ -89,5 +110,13 @@ extension QRScannerViewController: QRScannerPresenterDelegate {
         let scanResultsViewController = ScanResultsViewController()
         scanResultsViewController.presenter.url = url
         navigationController?.pushViewController(scanResultsViewController, animated: true)
+    }
+}
+
+// MARK: - Constatnts
+
+extension QRScannerViewController {
+    enum Metrics {
+        static let imageSize: CGFloat = 200
     }
 }
