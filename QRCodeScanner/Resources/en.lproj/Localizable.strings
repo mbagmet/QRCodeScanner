@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  QRCodeScanner
+
+  Created by Михаил Багмет on 20.06.2022.
+  
+*/
+
+"FAILURE_MESSAGE_TITLE" = "Failure";
+"SUCCESS_MESSAGE_TITLE" = "Success";
+"SUCCESS_MESSAGE" = "Operation complete.";
+"DISMISS_BUTTON_TITLE" = "Ok";
