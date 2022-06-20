@@ -9,4 +9,6 @@ import Foundation
 
 protocol QRScannerPresenterDelegate: AnyObject {
     func showWebView(with url: URL)
+    
+    func showAlert(openSettings: Bool, message: String)
 }

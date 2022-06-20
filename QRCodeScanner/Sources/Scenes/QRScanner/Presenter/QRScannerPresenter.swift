@@ -51,4 +51,8 @@ extension QRScannerPresenter: CaptureProviderDelegate {
         print(url)
         view?.showWebView(with: url)
     }
+    
+    func openAlert(openSettings: Bool, message: String) {
+        view?.showAlert(openSettings: openSettings, message: message)
+    }
 }

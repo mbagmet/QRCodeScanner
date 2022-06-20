@@ -9,4 +9,6 @@ import Foundation
 
 protocol CaptureProviderDelegate: AnyObject {
     func openWebView(with url: URL)
+    
+    func openAlert(openSettings: Bool, message: String)
 }

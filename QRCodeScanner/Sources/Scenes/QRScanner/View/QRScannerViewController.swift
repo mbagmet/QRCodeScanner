@@ -93,6 +93,27 @@ extension QRScannerViewController: QRScannerPresenterDelegate {
         scanResultsViewController.presenter.url = url
         navigationController?.pushViewController(scanResultsViewController, animated: true)
     }
+    
+    func showAlert(openSettings: Bool, message: String) {
+        let alert = UIAlertController(title: NSLocalizedString("FAILURE_MESSAGE_TITLE", comment: ""),
+                                      message: message,
+                                      preferredStyle: .alert)
+        let button = UIAlertAction(title: NSLocalizedString("DISMISS_BUTTON_TITLE", comment: ""),
+                                   style: .default,
+                                   handler: nil)
+        alert.addAction(button)
+        
+        if openSettings {
+            alert.addAction(UIAlertAction(title: NSLocalizedString("SETTINGS", comment: ""),
+                                          style: .`default`,
+                                          handler: { _ in
+                
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+            }))
+        }
+        
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - Constatnts
