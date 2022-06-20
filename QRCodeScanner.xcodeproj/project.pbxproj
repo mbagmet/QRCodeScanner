@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D929438C285F9A8800297236 /* FileDownloadProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D929438B285F9A8800297236 /* FileDownloadProvider.swift */; };
+		D929438E285FA0AA00297236 /* FileDownloadProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D929438D285FA0AA00297236 /* FileDownloadProviderDelegate.swift */; };
+		D9294391285FD63300297236 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D9294390285FD63300297236 /* Alamofire */; };
+		D9294397286010FA00297236 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9294399286010FA00297236 /* Localizable.strings */; };
 		D92C3D04285BB41E008EA36C /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D03285BB41E008EA36C /* CameraPreviewView.swift */; };
 		D92C3D07285BB5EC008EA36C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D92C3D06285BB5EC008EA36C /* SnapKit */; };
 		D92C3D0B285BCB90008EA36C /* QRScannerCaptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */; };
 		D92C3D0D285BE512008EA36C /* CaptureProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */; };
 		D92C3D10285BEA3A008EA36C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0F285BEA3A008EA36C /* String+Ext.swift */; };
+		D94632032860156700528B38 /* DownloadProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94632022860156700528B38 /* DownloadProvider.swift */; };
 		D972ADCA2858D40D00080DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADC92858D40D00080DC8 /* AppDelegate.swift */; };
 		D972ADCC2858D40D00080DC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADCB2858D40D00080DC8 /* SceneDelegate.swift */; };
 		D972ADCE2858D40D00080DC8 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADCD2858D40D00080DC8 /* QRScannerViewController.swift */; };
@@ -30,10 +35,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D929438B285F9A8800297236 /* FileDownloadProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadProvider.swift; sourceTree = "<group>"; };
+		D929438D285FA0AA00297236 /* FileDownloadProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadProviderDelegate.swift; sourceTree = "<group>"; };
+		D9294398286010FA00297236 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D929439A286010FD00297236 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D92C3D03285BB41E008EA36C /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 		D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerCaptionProvider.swift; sourceTree = "<group>"; };
 		D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureProviderDelegate.swift; sourceTree = "<group>"; };
 		D92C3D0F285BEA3A008EA36C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		D94632022860156700528B38 /* DownloadProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadProvider.swift; sourceTree = "<group>"; };
 		D972ADC62858D40D00080DC8 /* QRCodeScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D972ADC92858D40D00080DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D972ADCB2858D40D00080DC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,12 +69,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				D92C3D07285BB5EC008EA36C /* SnapKit in Frameworks */,
+				D9294391285FD63300297236 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D929438A285F9A3100297236 /* FileDownloadProvider */ = {
+			isa = PBXGroup;
+			children = (
+				D929439B286013C900297236 /* Protocols */,
+				D929438B285F9A8800297236 /* FileDownloadProvider.swift */,
+			);
+			path = FileDownloadProvider;
+			sourceTree = "<group>";
+		};
+		D929439B286013C900297236 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D94632022860156700528B38 /* DownloadProvider.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D92C3D09285BCB36008EA36C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +142,7 @@
 				D972ADD42858D40F00080DC8 /* LaunchScreen.storyboard */,
 				D972ADD72858D40F00080DC8 /* Info.plist */,
 				D9F544F028591B2A00A6E51B /* InfoPlist.strings */,
+				D9294399286010FA00297236 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -124,6 +153,7 @@
 				D972ADDF2858F86700080DC8 /* App */,
 				D972ADE02858F8A300080DC8 /* Scenes */,
 				D9A3333E285A6C870037A3D5 /* CaptureProvider */,
+				D929438A285F9A3100297236 /* FileDownloadProvider */,
 				D92C3D0E285BEA1F008EA36C /* Extensions */,
 			);
 			path = Sources;
@@ -223,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				D972ADF32859014300080DC8 /* ScanResults.swift */,
+				D929438D285FA0AA00297236 /* FileDownloadProviderDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -262,6 +293,7 @@
 			name = QRCodeScanner;
 			packageProductDependencies = (
 				D92C3D06285BB5EC008EA36C /* SnapKit */,
+				D9294390285FD63300297236 /* Alamofire */,
 			);
 			productName = QRCodeScanner;
 			productReference = D972ADC62858D40D00080DC8 /* QRCodeScanner.app */;
@@ -294,6 +326,7 @@
 			mainGroup = D972ADBD2858D40D00080DC8;
 			packageReferences = (
 				D92C3D05285BB5EC008EA36C /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D929438F285FD63300297236 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = D972ADC72858D40D00080DC8 /* Products */;
 			projectDirPath = "";
@@ -309,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9294397286010FA00297236 /* Localizable.strings in Resources */,
 				D972ADD62858D40F00080DC8 /* LaunchScreen.storyboard in Resources */,
 				D9F544EE28591B2A00A6E51B /* InfoPlist.strings in Resources */,
 				D972ADD32858D40F00080DC8 /* Assets.xcassets in Resources */,
@@ -325,11 +359,14 @@
 			files = (
 				D972ADEE2858FF2800080DC8 /* QRScannerPresenterDelegate.swift in Sources */,
 				D972ADE82858FD8600080DC8 /* QRScannerPresenter.swift in Sources */,
+				D94632032860156700528B38 /* DownloadProvider.swift in Sources */,
+				D929438C285F9A8800297236 /* FileDownloadProvider.swift in Sources */,
 				D92C3D0D285BE512008EA36C /* CaptureProviderDelegate.swift in Sources */,
 				D92C3D10285BEA3A008EA36C /* String+Ext.swift in Sources */,
 				D972ADF22859013100080DC8 /* ScanResultsPresenter.swift in Sources */,
 				D972ADF42859014300080DC8 /* ScanResults.swift in Sources */,
 				D972ADCE2858D40D00080DC8 /* QRScannerViewController.swift in Sources */,
+				D929438E285FA0AA00297236 /* FileDownloadProviderDelegate.swift in Sources */,
 				D972ADCA2858D40D00080DC8 /* AppDelegate.swift in Sources */,
 				D972ADCC2858D40D00080DC8 /* SceneDelegate.swift in Sources */,
 				D972ADEC2858FEAC00080DC8 /* QRScanner.swift in Sources */,
@@ -344,6 +381,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D9294399286010FA00297236 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9294398286010FA00297236 /* en */,
+				D929439A286010FD00297236 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D972ADCF2858D40D00080DC8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -567,6 +613,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D929438F285FD63300297236 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
 		D92C3D05285BB5EC008EA36C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -578,6 +632,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D9294390285FD63300297236 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D929438F285FD63300297236 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		D92C3D06285BB5EC008EA36C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D92C3D05285BB5EC008EA36C /* XCRemoteSwiftPackageReference "SnapKit" */;

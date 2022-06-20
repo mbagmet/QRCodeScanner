@@ -182,7 +182,7 @@ extension CaptureProvider: AVCaptureMetadataOutputObjectsDelegate {
             }
             
             if let url = URL(string: qrCodeText) {
-                if metadataObjectsSemaphore.wait(timeout: .now()) == .success {
+                if metadataObjectsSemaphore.wait(timeout: .now() + 0.1) == .success {
                     DispatchQueue.main.async {
                         self.delegate?.openWebView(with: url)
                         self.stopCaption()

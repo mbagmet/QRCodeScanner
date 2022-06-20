@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class ScanResultsViewController: UIViewController, WKUIDelegate {
+class ScanResultsViewController: UIViewController, WKNavigationDelegate {
 
     // MARK: - Properties
     
@@ -23,6 +23,12 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
         return progressView
     }()
     
+    private lazy var activitiIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        
+        return activityIndicator
+    }()
+    
     // MARK: - Lifecycle
     
     var webView: WKWebView!
@@ -30,15 +36,13 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        view = webView
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        title = "webView.title"
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.title), options: .new, context: nil)
         
-        super.viewWillAppear(true)
+        webView.navigationDelegate = self
+        view = webView
     }
     
     override func viewDidLoad() {
@@ -51,6 +55,7 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
         // MARK: View setup
         setupHierarchy()
         setupLayout()
+        setupToolbar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,6 +68,8 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
     
     private func setupHierarchy() {
         navigationController?.navigationBar.addSubview(progressView)
+        
+        webView.addSubview(activitiIndicator)
     }
     
     private func setupLayout() {
@@ -70,6 +77,18 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
+        
+        activitiIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    private func setupToolbar() {
+        self.navigationController?.setToolbarHidden(false, animated: true)
+
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(openSharePanel))
+        self.toolbarItems = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                                     shareButton]
     }
     
     // MARK: - Methods
@@ -80,8 +99,14 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
             progressView.progress = Float(webView.estimatedProgress)
             
             if webView.estimatedProgress == 1.0 {
-                progressView.removeFromSuperview()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    self.progressView.removeFromSuperview()
+                })
             }
+        }
+        
+        if keyPath == #keyPath(WKWebView.title) {
+            title = webView.title
         }
     }
     
@@ -90,13 +115,65 @@ class ScanResultsViewController: UIViewController, WKUIDelegate {
     private func addObserver() {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
     }
+    
+    @objc private func openSharePanel(sender: AnyObject) {
+        
+        activitiIndicator.startAnimating()
+        
+        if presenter.isDownloadable() {
+            presenter.startDownloading()
+        } else {
+            showActivityViewController(objectsToShare: [presenter.url!])
+        }
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let button = UIAlertAction(title: NSLocalizedString("DISMISS_BUTTON_TITLE", comment: ""),
+                                   style: .default,
+                                   handler: nil)
+        alert.addAction(button)
+        
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - Presenter Delegate
 
 extension ScanResultsViewController: ScanResultsPresenterDelegate {
+    
+    func getDownloadProwider() {
+        presenter.initDownloadProvider(webView: webView)
+    }
+    
     func showWebPage(url: URL) {
         let request = URLRequest(url: url)
         webView.load(request)
+    }
+    
+    func showActivityViewController(objectsToShare: [Any]) {
+        
+        let objectsToShare = objectsToShare
+
+        let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.navigationController?.toolbar
+        
+        activityController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?,
+                                                          completed: Bool,
+                                                          returnedItems: [Any]?,
+                                                          error: Error?) in
+            if !completed {
+                guard let error = error else { return }
+                activityController.dismiss(animated: true)
+                self.showAlert(title: NSLocalizedString("FAILURE_MESSAGE_TITLE", comment: ""),
+                               message: error.localizedDescription)
+            }
+            self.showAlert(title: NSLocalizedString("SUCCESS_MESSAGE_TITLE", comment: ""),
+                           message: NSLocalizedString("SUCCESS_MESSAGE", comment: ""))
+        }
+        
+        present(activityController, animated: true, completion: nil)
+        
+        activitiIndicator.stopAnimating()
     }
 }
