@@ -18,28 +18,10 @@ class QRScannerViewController: UIViewController {
     
     private lazy var cameraPreviewView = CameraPreviewView()
     
-    private lazy var qrLabel: UILabel = {
-        let label = UILabel()
-        label.text = "test"
-        label.textColor = .white
-        
-        return label
-    }()
-    
     lazy var regionOfInterestImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-//        imageView.tintColor = .secondarySystemBackground
         imageView.image = UIImage(named: "caption")
-        
-//        imageView.clipsToBounds = true
-//        imageView.layer.masksToBounds = true
-//        imageView.layer.cornerRadius = Metric.imageSize / 2
-//        imageView.layer.borderWidth = Metric.imageBorderWidth
-//        imageView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-//
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
-//        imageView.addGestureRecognizer(tapGestureRecognizer)
 
         return imageView
     }()
@@ -63,9 +45,9 @@ class QRScannerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         presenter.startCaptureService()
+        
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
