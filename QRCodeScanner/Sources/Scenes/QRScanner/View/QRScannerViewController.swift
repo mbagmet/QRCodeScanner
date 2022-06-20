@@ -18,12 +18,12 @@ class QRScannerViewController: UIViewController {
     
     private lazy var cameraPreviewView = CameraPreviewView()
     
-    private lazy var qrLabel: UILabel = {
-        let label = UILabel()
-        label.text = "test"
-        label.textColor = .white
-        
-        return label
+    lazy var regionOfInterestImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "caption")
+
+        return imageView
     }()
     
     // MARK: - Lifecycle
@@ -45,9 +45,9 @@ class QRScannerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         presenter.startCaptureService()
+        
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,7 +60,7 @@ class QRScannerViewController: UIViewController {
     
     private func setupHierarchy() {
         view.addSubview(cameraPreviewView)
-        view.addSubview(qrLabel)
+        view.addSubview(regionOfInterestImageView)
     }
     
     private func setupLayout() {
@@ -68,8 +68,11 @@ class QRScannerViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        qrLabel.snp.makeConstraints { make in
+        regionOfInterestImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            
+            make.height.equalTo(Metrics.imageSize)
+            make.width.equalTo(regionOfInterestImageView.snp.height)
         }
     }
     
@@ -89,5 +92,13 @@ extension QRScannerViewController: QRScannerPresenterDelegate {
         let scanResultsViewController = ScanResultsViewController()
         scanResultsViewController.presenter.url = url
         navigationController?.pushViewController(scanResultsViewController, animated: true)
+    }
+}
+
+// MARK: - Constatnts
+
+extension QRScannerViewController {
+    enum Metrics {
+        static let imageSize: CGFloat = 200
     }
 }
