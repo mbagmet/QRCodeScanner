@@ -108,7 +108,8 @@ extension QRScannerViewController: QRScannerPresenterDelegate {
                                           style: .`default`,
                                           handler: { _ in
                 
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }))
         }
         
