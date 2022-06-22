@@ -36,8 +36,8 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     func configure() {
         checkCameraAccess()
         
-        captureQueue.async {
-            self.configureSession()
+        captureQueue.async { [weak self] in
+            self?.configureSession()
         }
     }
     
@@ -45,18 +45,18 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     
     /// Если конфигурация камеры .success,  то начинает захват видео
     func startCaption() {
-        captureQueue.async {
-            switch self.cameraConfiguration {
+        captureQueue.async { [weak self] in
+            switch self?.cameraConfiguration {
                 
             case .success:
-                self.captureSession.startRunning()
+                self?.captureSession.startRunning()
             case .denied:
                 DispatchQueue.main.async {
-                    self.delegate?.handleResultMessage(result: .denied)
+                    self?.delegate?.handleResultMessage(result: .denied)
                 }
-            case .failed:
+            case .failed, .none:
                 DispatchQueue.main.async {
-                    self.delegate?.handleResultMessage(result: .failed)
+                    self?.delegate?.handleResultMessage(result: .failed)
                 }
             }
         }
@@ -64,9 +64,9 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     
     /// Останавливает захват видео
     func stopCaption() {
-        captureQueue.async {
-            if self.cameraConfiguration == .success {
-                self.captureSession.stopRunning()
+        captureQueue.async { [weak self] in
+            if self?.cameraConfiguration == .success {
+                self?.captureSession.stopRunning()
             }
         }
     }
@@ -83,11 +83,11 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
             
         case .notDetermined:
             captureQueue.suspend()
-            AVCaptureDevice.requestAccess(for: .video) { granted in
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 if !granted {
-                    self.cameraConfiguration = .denied
+                    self?.cameraConfiguration = .denied
                 }
-                self.captureQueue.resume()
+                self?.captureQueue.resume()
             }
 
         default:
@@ -187,10 +187,10 @@ extension CaptureProvider: AVCaptureMetadataOutputObjectsDelegate {
             
             if let url = URL(string: qrCodeText) {
                 if metadataObjectsSemaphore.wait(timeout: .now() + 0.1) == .success {
-                    DispatchQueue.main.async {
-                        self.delegate?.handleUrl(url: url)
-                        self.stopCaption()
-                        self.metadataObjectsSemaphore.signal()
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.handleUrl(url: url)
+                        self?.stopCaption()
+                        self?.metadataObjectsSemaphore.signal()
                     }          
                 }
             }

@@ -158,17 +158,17 @@ extension ScanResultsViewController: ScanResultsPresenterDelegate {
         let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = self.navigationController?.toolbar
         
-        activityController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?,
-                                                          completed: Bool,
-                                                          returnedItems: [Any]?,
-                                                          error: Error?) in
+        activityController.completionWithItemsHandler = { [weak self] (activityType: UIActivity.ActivityType?,
+                                                                       completed: Bool,
+                                                                       returnedItems: [Any]?,
+                                                                       error: Error?) in
             if !completed {
                 guard let error = error else { return }
                 activityController.dismiss(animated: true)
-                self.showAlert(title: NSLocalizedString("FAILURE_MESSAGE_TITLE", comment: ""),
+                self?.showAlert(title: NSLocalizedString("FAILURE_MESSAGE_TITLE", comment: ""),
                                message: error.localizedDescription)
             }
-            self.showAlert(title: NSLocalizedString("SUCCESS_MESSAGE_TITLE", comment: ""),
+            self?.showAlert(title: NSLocalizedString("SUCCESS_MESSAGE_TITLE", comment: ""),
                            message: NSLocalizedString("SUCCESS_MESSAGE", comment: ""))
         }
         
