@@ -10,9 +10,7 @@ import WebKit
 protocol DownloadProvider {
     var delegate: FileDownloadProviderDelegate? { get set }
     var mimeTypes: [MimeType] { get set }
-    
     var webView: WKWebView? { get }
-    
     var canDownload: Bool { get set }
     
     func downloadFile(url: URL, completion: @escaping (NSURL) -> ())

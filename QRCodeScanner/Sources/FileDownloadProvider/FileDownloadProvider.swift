@@ -14,9 +14,7 @@ class FileDownloadProvider: NSObject, DownloadProvider {
     
     weak var delegate: FileDownloadProviderDelegate?
     var mimeTypes: [MimeType]
-    
     var webView: WKWebView?
-    
     var canDownload = false
     
     // MARK: - Initializers
