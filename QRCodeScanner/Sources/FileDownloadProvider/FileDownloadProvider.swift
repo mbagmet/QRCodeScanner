@@ -8,7 +8,7 @@
 import WebKit
 import Alamofire
 
-class FileDownloadProvider: NSObject {
+class FileDownloadProvider: NSObject, DownloadProvider {
 
     // MARK: - Properties
     
