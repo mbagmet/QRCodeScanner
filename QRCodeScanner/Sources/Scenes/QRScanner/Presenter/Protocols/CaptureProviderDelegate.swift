@@ -10,5 +10,5 @@ import Foundation
 protocol CaptureProviderDelegate: AnyObject {
     func handleUrl(url: URL)
     
-    func handleResultMessage(openSettings: Bool, message: String)
+    func handleResultMessage(result: CaptureProvider.CameraConfiguration)
 }

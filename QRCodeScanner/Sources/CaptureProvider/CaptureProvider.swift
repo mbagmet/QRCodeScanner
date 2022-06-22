@@ -18,7 +18,7 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     private let captureQueue = DispatchQueue(label: "Capture Queue")
     
     // Camera configuration
-    private enum CameraConfiguration {
+    enum CameraConfiguration {
         case success
         case denied
         case failed
@@ -52,11 +52,11 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
                 self.captureSession.startRunning()
             case .denied:
                 DispatchQueue.main.async {
-                    self.delegate?.handleResultMessage(openSettings: true, message: NSLocalizedString("NOT_AUTHORIZED_MESSAGE", comment: ""))
+                    self.delegate?.handleResultMessage(result: .denied)
                 }
             case .failed:
                 DispatchQueue.main.async {
-                    self.delegate?.handleResultMessage(openSettings: false, message: NSLocalizedString("CONFIGURATION_FAILURE_MESSAGE", comment: ""))
+                    self.delegate?.handleResultMessage(result: .failed)
                 }
             }
         }
