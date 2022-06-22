@@ -91,13 +91,13 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
             }
 
         default:
-            self.cameraConfiguration = .denied
+            cameraConfiguration = .denied
         }
     }
     
     // MARK: Session Configuration
     private func configureSession() {
-        if self.cameraConfiguration != .success {
+        if cameraConfiguration != .success {
             return
         }
         
