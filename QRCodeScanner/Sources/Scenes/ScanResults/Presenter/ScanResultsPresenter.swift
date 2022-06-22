@@ -13,7 +13,6 @@ class ScanResultsPresenter: ScanResults {
     
     weak var view: ScanResultsPresenterDelegate?
     var url: URL?
-    //var url = URL(string: "https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf")
     
     private var mimeTypes = [MimeType(type: "pdf", fileExtension: "pdf")]
     private var fileDownloadProvider: FileDownloadProvider?
@@ -26,7 +25,7 @@ class ScanResultsPresenter: ScanResults {
     
     func getUrl() {
         guard let url = url else { return }
-        view?.getDownloadProwider()
+        view?.getDownloadProvider()
         view?.showWebPage(url: url)
     }
     

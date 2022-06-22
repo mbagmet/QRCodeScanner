@@ -16,6 +16,7 @@
 		D92C3D0B285BCB90008EA36C /* QRScannerCaptionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */; };
 		D92C3D0D285BE512008EA36C /* CaptureProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */; };
 		D92C3D10285BEA3A008EA36C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C3D0F285BEA3A008EA36C /* String+Ext.swift */; };
+		D93AC48F2863CBCB004BBD78 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AC48E2863CBCB004BBD78 /* Strings.swift */; };
 		D94632032860156700528B38 /* DownloadProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94632022860156700528B38 /* DownloadProvider.swift */; };
 		D972ADCA2858D40D00080DC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADC92858D40D00080DC8 /* AppDelegate.swift */; };
 		D972ADCC2858D40D00080DC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D972ADCB2858D40D00080DC8 /* SceneDelegate.swift */; };
@@ -43,6 +44,7 @@
 		D92C3D0A285BCB90008EA36C /* QRScannerCaptionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerCaptionProvider.swift; sourceTree = "<group>"; };
 		D92C3D0C285BE512008EA36C /* CaptureProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureProviderDelegate.swift; sourceTree = "<group>"; };
 		D92C3D0F285BEA3A008EA36C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		D93AC48E2863CBCB004BBD78 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		D94632022860156700528B38 /* DownloadProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadProvider.swift; sourceTree = "<group>"; };
 		D972ADC62858D40D00080DC8 /* QRCodeScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D972ADC92858D40D00080DC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D93AC48D2863CBA1004BBD78 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				D93AC48E2863CBCB004BBD78 /* Strings.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		D972ADBD2858D40D00080DC8 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +165,7 @@
 				D9A3333E285A6C870037A3D5 /* CaptureProvider */,
 				D929438A285F9A3100297236 /* FileDownloadProvider */,
 				D92C3D0E285BEA1F008EA36C /* Extensions */,
+				D93AC48D2863CBA1004BBD78 /* Constants */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -358,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D972ADEE2858FF2800080DC8 /* QRScannerPresenterDelegate.swift in Sources */,
+				D93AC48F2863CBCB004BBD78 /* Strings.swift in Sources */,
 				D972ADE82858FD8600080DC8 /* QRScannerPresenter.swift in Sources */,
 				D94632032860156700528B38 /* DownloadProvider.swift in Sources */,
 				D929438C285F9A8800297236 /* FileDownloadProvider.swift in Sources */,

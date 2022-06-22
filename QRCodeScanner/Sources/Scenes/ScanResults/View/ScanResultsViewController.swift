@@ -23,7 +23,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
         return progressView
     }()
     
-    private lazy var activitiIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         
         return activityIndicator
@@ -69,7 +69,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
     private func setupHierarchy() {
         navigationController?.navigationBar.addSubview(progressView)
         
-        webView.addSubview(activitiIndicator)
+        webView.addSubview(activityIndicator)
     }
     
     private func setupLayout() {
@@ -78,7 +78,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
             make.width.equalToSuperview()
         }
         
-        activitiIndicator.snp.makeConstraints { make in
+        activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }
@@ -118,7 +118,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
     
     @objc private func openSharePanel(sender: AnyObject) {
         
-        activitiIndicator.startAnimating()
+        activityIndicator.startAnimating()
         
         if presenter.isDownloadable() {
             presenter.startDownloading()
@@ -129,9 +129,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let button = UIAlertAction(title: NSLocalizedString("DISMISS_BUTTON_TITLE", comment: ""),
-                                   style: .default,
-                                   handler: nil)
+        let button = UIAlertAction(title: Strings.dismissButtonTitle, style: .default, handler: nil)
         alert.addAction(button)
         
         present(alert, animated: true)
@@ -142,7 +140,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
 
 extension ScanResultsViewController: ScanResultsPresenterDelegate {
     
-    func getDownloadProwider() {
+    func getDownloadProvider() {
         presenter.initDownloadProvider(webView: webView)
     }
     
@@ -158,22 +156,20 @@ extension ScanResultsViewController: ScanResultsPresenterDelegate {
         let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = self.navigationController?.toolbar
         
-        activityController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?,
-                                                          completed: Bool,
-                                                          returnedItems: [Any]?,
-                                                          error: Error?) in
+        activityController.completionWithItemsHandler = { [weak self] (activityType: UIActivity.ActivityType?,
+                                                                       completed: Bool,
+                                                                       returnedItems: [Any]?,
+                                                                       error: Error?) in
             if !completed {
                 guard let error = error else { return }
                 activityController.dismiss(animated: true)
-                self.showAlert(title: NSLocalizedString("FAILURE_MESSAGE_TITLE", comment: ""),
-                               message: error.localizedDescription)
+                self?.showAlert(title: Strings.failureMessageTitle, message: error.localizedDescription)
             }
-            self.showAlert(title: NSLocalizedString("SUCCESS_MESSAGE_TITLE", comment: ""),
-                           message: NSLocalizedString("SUCCESS_MESSAGE", comment: ""))
+            self?.showAlert(title: Strings.successMessageTitle, message: Strings.successMessage)
         }
         
         present(activityController, animated: true, completion: nil)
         
-        activitiIndicator.stopAnimating()
+        activityIndicator.stopAnimating()
     }
 }

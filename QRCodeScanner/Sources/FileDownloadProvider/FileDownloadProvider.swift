@@ -8,15 +8,13 @@
 import WebKit
 import Alamofire
 
-class FileDownloadProvider: NSObject {
+class FileDownloadProvider: NSObject, DownloadProvider {
 
     // MARK: - Properties
     
     weak var delegate: FileDownloadProviderDelegate?
     var mimeTypes: [MimeType]
-    
     var webView: WKWebView?
-    
     var canDownload = false
     
     // MARK: - Initializers

@@ -18,7 +18,7 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     private let captureQueue = DispatchQueue(label: "Capture Queue")
     
     // Camera configuration
-    private enum CameraConfiguration {
+    enum CameraConfiguration {
         case success
         case denied
         case failed
@@ -36,8 +36,8 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     func configure() {
         checkCameraAccess()
         
-        captureQueue.async {
-            self.configureSession()
+        captureQueue.async { [weak self] in
+            self?.configureSession()
         }
     }
     
@@ -45,18 +45,18 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     
     /// Если конфигурация камеры .success,  то начинает захват видео
     func startCaption() {
-        captureQueue.async {
-            switch self.cameraConfiguration {
+        captureQueue.async { [weak self] in
+            switch self?.cameraConfiguration {
                 
             case .success:
-                self.captureSession.startRunning()
+                self?.captureSession.startRunning()
             case .denied:
                 DispatchQueue.main.async {
-                    self.delegate?.openAlert(openSettings: true, message: NSLocalizedString("NOT_AUTHORIZED_MESSAGE", comment: ""))
+                    self?.delegate?.handleResultMessage(result: .denied)
                 }
-            case .failed:
+            case .failed, .none:
                 DispatchQueue.main.async {
-                    self.delegate?.openAlert(openSettings: false, message: NSLocalizedString("CONFIGURATION_FAILURE_MESSAGE", comment: ""))
+                    self?.delegate?.handleResultMessage(result: .failed)
                 }
             }
         }
@@ -64,9 +64,9 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
     
     /// Останавливает захват видео
     func stopCaption() {
-        captureQueue.async {
-            if self.cameraConfiguration == .success {
-                self.captureSession.stopRunning()
+        captureQueue.async { [weak self] in
+            if self?.cameraConfiguration == .success {
+                self?.captureSession.stopRunning()
             }
         }
     }
@@ -83,21 +83,21 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
             
         case .notDetermined:
             captureQueue.suspend()
-            AVCaptureDevice.requestAccess(for: .video) { granted in
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 if !granted {
-                    self.cameraConfiguration = .denied
+                    self?.cameraConfiguration = .denied
                 }
-                self.captureQueue.resume()
+                self?.captureQueue.resume()
             }
 
         default:
-            self.cameraConfiguration = .denied
+            cameraConfiguration = .denied
         }
     }
     
     // MARK: Session Configuration
     private func configureSession() {
-        if self.cameraConfiguration != .success {
+        if cameraConfiguration != .success {
             return
         }
         
@@ -187,10 +187,10 @@ extension CaptureProvider: AVCaptureMetadataOutputObjectsDelegate {
             
             if let url = URL(string: qrCodeText) {
                 if metadataObjectsSemaphore.wait(timeout: .now() + 0.1) == .success {
-                    DispatchQueue.main.async {
-                        self.delegate?.openWebView(with: url)
-                        self.stopCaption()
-                        self.metadataObjectsSemaphore.signal()
+                    DispatchQueue.main.async { [weak self] in
+                        self?.delegate?.handleUrl(url: url)
+                        self?.stopCaption()
+                        self?.metadataObjectsSemaphore.signal()
                     }          
                 }
             }
