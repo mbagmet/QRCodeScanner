@@ -55,9 +55,9 @@ extension QRScannerPresenter: CaptureProviderDelegate {
     func handleResultMessage(result: CaptureProvider.CameraConfiguration) {
         switch result {
         case .denied:
-            view?.showAlert(openSettings: true, message: NSLocalizedString("NOT_AUTHORIZED_MESSAGE", comment: ""))
+            view?.showAlert(openSettings: true, message: Strings.notAuthorizedMessage)
         default:
-            view?.showAlert(openSettings: false, message: NSLocalizedString("CONFIGURATION_FAILURE_MESSAGE", comment: ""))
+            view?.showAlert(openSettings: false, message: Strings.configurationFailureMessage)
         }
     }
 }

@@ -129,9 +129,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let button = UIAlertAction(title: NSLocalizedString("DISMISS_BUTTON_TITLE", comment: ""),
-                                   style: .default,
-                                   handler: nil)
+        let button = UIAlertAction(title: Strings.dismissButtonTitle, style: .default, handler: nil)
         alert.addAction(button)
         
         present(alert, animated: true)
@@ -165,11 +163,9 @@ extension ScanResultsViewController: ScanResultsPresenterDelegate {
             if !completed {
                 guard let error = error else { return }
                 activityController.dismiss(animated: true)
-                self?.showAlert(title: NSLocalizedString("FAILURE_MESSAGE_TITLE", comment: ""),
-                               message: error.localizedDescription)
+                self?.showAlert(title: Strings.failureMessageTitle, message: error.localizedDescription)
             }
-            self?.showAlert(title: NSLocalizedString("SUCCESS_MESSAGE_TITLE", comment: ""),
-                           message: NSLocalizedString("SUCCESS_MESSAGE", comment: ""))
+            self?.showAlert(title: Strings.successMessageTitle, message: Strings.successMessage)
         }
         
         present(activityController, animated: true, completion: nil)
