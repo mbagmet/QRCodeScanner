@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ScanResultsPresenterDelegate: AnyObject {
-    func getDownloadProwider()
+    func getDownloadProvider()
     func showWebPage(url: URL)
     func showActivityViewController(objectsToShare: [Any])
 }

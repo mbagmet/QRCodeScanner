@@ -23,7 +23,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
         return progressView
     }()
     
-    private lazy var activitiIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         
         return activityIndicator
@@ -69,7 +69,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
     private func setupHierarchy() {
         navigationController?.navigationBar.addSubview(progressView)
         
-        webView.addSubview(activitiIndicator)
+        webView.addSubview(activityIndicator)
     }
     
     private func setupLayout() {
@@ -78,7 +78,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
             make.width.equalToSuperview()
         }
         
-        activitiIndicator.snp.makeConstraints { make in
+        activityIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
     }
@@ -118,7 +118,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
     
     @objc private func openSharePanel(sender: AnyObject) {
         
-        activitiIndicator.startAnimating()
+        activityIndicator.startAnimating()
         
         if presenter.isDownloadable() {
             presenter.startDownloading()
@@ -142,7 +142,7 @@ class ScanResultsViewController: UIViewController, WKNavigationDelegate {
 
 extension ScanResultsViewController: ScanResultsPresenterDelegate {
     
-    func getDownloadProwider() {
+    func getDownloadProvider() {
         presenter.initDownloadProvider(webView: webView)
     }
     
@@ -174,6 +174,6 @@ extension ScanResultsViewController: ScanResultsPresenterDelegate {
         
         present(activityController, animated: true, completion: nil)
         
-        activitiIndicator.stopAnimating()
+        activityIndicator.stopAnimating()
     }
 }

@@ -26,7 +26,7 @@ class ScanResultsPresenter: ScanResults {
     
     func getUrl() {
         guard let url = url else { return }
-        view?.getDownloadProwider()
+        view?.getDownloadProvider()
         view?.showWebPage(url: url)
     }
     

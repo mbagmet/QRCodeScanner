@@ -52,11 +52,11 @@ class CaptureProvider: NSObject, QRScannerCaptionProvider {
                 self.captureSession.startRunning()
             case .denied:
                 DispatchQueue.main.async {
-                    self.delegate?.openAlert(openSettings: true, message: NSLocalizedString("NOT_AUTHORIZED_MESSAGE", comment: ""))
+                    self.delegate?.handleResultMessage(openSettings: true, message: NSLocalizedString("NOT_AUTHORIZED_MESSAGE", comment: ""))
                 }
             case .failed:
                 DispatchQueue.main.async {
-                    self.delegate?.openAlert(openSettings: false, message: NSLocalizedString("CONFIGURATION_FAILURE_MESSAGE", comment: ""))
+                    self.delegate?.handleResultMessage(openSettings: false, message: NSLocalizedString("CONFIGURATION_FAILURE_MESSAGE", comment: ""))
                 }
             }
         }
@@ -188,7 +188,7 @@ extension CaptureProvider: AVCaptureMetadataOutputObjectsDelegate {
             if let url = URL(string: qrCodeText) {
                 if metadataObjectsSemaphore.wait(timeout: .now() + 0.1) == .success {
                     DispatchQueue.main.async {
-                        self.delegate?.openWebView(with: url)
+                        self.delegate?.handleUrl(url: url)
                         self.stopCaption()
                         self.metadataObjectsSemaphore.signal()
                     }          
